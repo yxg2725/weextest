@@ -8,6 +8,7 @@
 <style scoped>
     .line{
         background-color: gray;
+        opacity:0.5;
         height: 2px;
         width: 750px; 
     }

@@ -1,0 +1,9 @@
+.temp/
+dist/
+node_modules/
+platforms/android/.gradle/
+platforms/android/.idea/
+platforms/android/*.iml
+platforms/android/local.properties
+*.iml
+platforms/android/app/build/

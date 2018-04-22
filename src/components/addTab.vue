@@ -12,12 +12,17 @@ export default {
   props:["category","numValue","priceValue"],
   data() {
     return {
+        numValue:'',
+        priceValue:'',
     }
   },
   components: {
   },
   methods:{
       add(){
+        //   if(!numValue || !priceValue){
+        //       return;
+        //   }
           this.$emit('onAdd','');
       },
 
@@ -39,24 +44,39 @@ export default {
 <style scoped>
     .page{
         flex-direction: row;
-        margin:5px;
+        margin:10px;
+        justify-content:center;
     }
 
     .category{
         flex:2;
         margin:3px;
+        font-size:28px;
+        justify-content:center;
+        padding-top:10px;
+        padding-bottom:10px;
     }
 
     .num{
         flex:1;
         border-width: 1px;
-        margin:3px;
+        margin-left:5px;
+        margin-right:5px;
+        padding-top:10px;
+        padding-left:5px;
+        padding-bottom:10px;
+        justify-content:center;
     }
 
     .price{
         flex:1;
         border-width: 1px;
-        margin:3px;
+        margin-left:5px;
+        margin-right:5px;
+        padding-top:10px;
+        padding-left:5px;
+        padding-bottom:10px;
+        justify-content:center;
     }
     .add{
         flex:1;
@@ -64,7 +84,11 @@ export default {
         border-width: 1px;
         border-radius: 10px;
         text-align: center;
-        margin:3px;
+        margin-left:5px;
+        margin-right:5px;
+        padding-top:10px;
+        padding-bottom:10px;
         background-image: linear-gradient(to top,#a80077,#66ff00);
+        font-size:28px;
     }
 </style>

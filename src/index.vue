@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" @click="wrapperClick">
     <!--<label-view keyName="姓名:" hint="请输入姓名" content=""></label-view>
      <image :src="logo" class="logo" />
     <text class="greeting">The environment is ready!hahhahahahhahahah</text> 
@@ -9,9 +9,10 @@
     <line></line>
 
     <!-- 清单列表 -->
-    <list class="list">
-      <cell v-for="item in list">
+    <list style="margin-bottom:100px">
+      <cell v-for="item in list" @click="listItemClick">
          <itemCell  :categoryName="item.categoryName" :num="item.num" :price="item.price" :toatal="item.total" ></itemCell>
+         <line></line>
       </cell>
     </list>
 
@@ -19,7 +20,7 @@
     <bottom :total = "totalPrice" ></bottom>
     <!-- 菜单 -->
     <menu v-if="showMenu" @addCategory="onAddCategory" @delCategory="onDelCategory" @about="onAbout"></menu>
-    <addCategory class="add" v-if="showAddCategory"></addCategory>
+    <addCategory  v-if="showAddCategory" @onConfirm="onConfirm" @onCancel="onCancel"></addCategory>
   </div>
 </template>
 
@@ -36,6 +37,7 @@ import addCategory from '@/components/addCategory.vue'
 const storage = weex.requireModule('storage')
 const picker = weex.requireModule('picker')
 const addCategoryBroadcast = new BroadcastChannel('addCategory')
+const modal = weex.requireModule("modal");
 export default {
   name: 'App',
   components: {
@@ -65,6 +67,14 @@ export default {
   },
   methods:{
     addClick(){
+      //非空判断
+      if(this.num=="" || this.price=="" || this.categoryName == "请选择分类"){
+        modal.toast({
+          message:"请输入有效数据！",
+          duration:3
+        });
+        return;
+      }
       var bean = {};
       bean.categoryName = this.categoryName;
       bean.num = this.num;
@@ -113,6 +123,16 @@ export default {
     //删除分类
     onDelCategory(){
       this.showMenu = false;
+
+      picker.pick({
+        index:0,
+        items:this.categoryList,
+        title:'选择要删除的分类'
+      },ret=> {
+        if(ret.result=="success"){
+          this.categoryList.splice(ret.data,1);
+        }
+      });
     },
 
     //关于
@@ -122,26 +142,57 @@ export default {
 
     //选择分类
     onSelectCategory(){
+      if(this.showMenu == true){
+        this.showMenu = false;
+      }
       picker.pick({
-        
-      },function(params) {
-        
+        index:0,
+        items:this.categoryList,
+        title:'选择分类'
+      },ret=> {
+        if(ret.result=="success"){
+          this.categoryName = this.categoryList[ret.data];
+        }
       });
+    },
+
+    //添加分类 点击确定
+    onConfirm(category){
+      this.showAddCategory = false;
+
+      this.categoryList.forEach(element => {
+            if(element == category){
+                return;
+            }
+        });
+
+      this.categoryList.push(category);
+      storage.setItem('category', JSON.stringify(this.categoryList), event => {
+        console.log('set success')
+        })
+    },
+
+    //点击添加分类的取消
+    onCancel(){
+      this.showAddCategory = false;
+    },
+    wrapperClick(){
+      if(this.showMenu == true){
+        this.showMenu = false;
+      }
+    },
+    listItemClick(){
+      if(this.showMenu == true){
+        this.showMenu = false;
+      }
     }
+
   },
   created (){
 
-    //添加分类时 点击确定或取消监听
-    addCategoryBroadcast.onmessage = function (e) {
-      this.showAddCategory = false;
-      console.log("收到了。。。");
-    };
-
     storage.getItem('category', event => {
           console.log('get value:', event.data);
-          if(!event.data){
-            this.categoryList = JSON.parse(event.data);
-          }
+          this.categoryList = JSON.parse(event.data);
           
     });
   }
@@ -168,12 +219,5 @@ export default {
     font-size: 32px;
     color: #727272;
   }
-  .add{
-    position: absolute;
-    left: 175px;
-    bottom:5170px;
-  }
-  .list{
-    margin-bottom: 100px;
-  }
+  
 </style>

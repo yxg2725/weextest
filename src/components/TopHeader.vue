@@ -1,7 +1,7 @@
 <template>
   <div class="page">
       <text class="top"> {{title}}</text>
-      <image class="img" @click="onClick"></image>
+      <image class="img" @click="onClick" src="assets:icon_phone.png"></image>
   </div>
 </template>
 
@@ -22,15 +22,14 @@
 
 <style scoped>
     .page{
-      width: 750px;
-      height: 30px;
       justify-content: center;
-      align-items: center;
-      background-color: aquamarine;
+        align-items: center;
+        background-color: aquamarine;
+        height:100px;
     }
     .top{
         padding: 20px;
-        font-size: 30px;
+        font-size:30px;
     }
     .img{
       width: 60px;
@@ -39,6 +38,5 @@
       position: absolute;
       right: 20px;
       top:20px;
-      
     }
 </style>

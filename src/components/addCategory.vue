@@ -1,13 +1,18 @@
 <template>
-  <div class="page">
-      <text class="title">请添加分类</text>
-      <input type="text" placeholder="请输入分类名称" class="in" @input="onInput"></input>
-      <div class="sureAndCancel">
-          <text class="text" @click="cancel">取消</text>
-          <text class="text" @click="confirm">确定</text>
-      </div>
-      
-  </div>
+    <div class="container">
+        <div class="wrapper" @click="bgClick">
+            
+        </div>
+        <div class="page">
+            <text class="title">请添加分类</text>
+            <input type="text" placeholder="请输入分类名称" class="in" @input="onInput"></input>
+            <div class="sureAndCancel">
+                <text class="text" @click="cancel">取消</text>
+                <text class="text" @click="confirm">确定</text>
+            </div>
+        </div>
+    </div>
+  
 </template>
 
 <script>
@@ -17,51 +22,49 @@ export default {
   data() {
     return {
         category:'',
-        categoryList:[],
     }
   },
   components: {
   },
   created(){
-      storage.getItem('category', event => {
-          console.log('get value:', event.data);
-          if(!event.data){
-              this.categoryList = JSON.parse(event.data);
-          }
-          
-        })
+      
   },
   methods:{
       cancel(){
-          addCategoryBroadcast.postMessage("");
-          console.log("cancel");
+          this.$emit('onCancel',"");
       },
       confirm(){
-          addCategoryBroadcast.postMessage("");
-          console.log("confirm");
-
-            this.categoryList.forEach(element => {
-                if(element == this.category){
-                    return;
-                }
-            });
-
-            this.categoryList.unshift(this.category);
-          storage.setItem('category', JSON.stringify(this.categoryList), event => {
-            console.log('set success')
-        })
+          this.$emit('onConfirm',this.category);
       },
       onInput(event){
           this.category = event.value;
+      },
+      bgClick(event){
+        // 阻止继续冒泡.
+        event.stopPropagation();
       }
   }
 }
 </script>
 
 <style scoped>
+    .container{
+        position: absolute;
+        left:0px;
+        right:0px;
+        bottom:0px;
+        top:0px;
+        
+    }
+    .wrapper{
+        width:750px;
+        height:1334px;
+        background-color:#000000;
+        opacity:0.5;
+    }
     .page{
         position: absolute;
-        left: 10;
+        right: 175;
         bottom:517px;
         width:400px;
         height: 200px;
@@ -78,16 +81,17 @@ export default {
     .title{
         text-align: center;
         padding:10px;
-        font-size: 28px;
+        font-size:28px;
+
     }
     .in{
         border-bottom-width: 1px;
         padding:10px;
     }
     .text{
+        margin-top:10px;
         flex:1;
         text-align: center;
-        padding: 10px;
-        font-size: 28px;
+        font-size:28px;
     }
 </style>

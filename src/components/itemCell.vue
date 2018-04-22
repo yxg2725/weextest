@@ -1,22 +1,22 @@
 <template>
   <div class="page">
-        <image class="img"></image>
+        <image class="img" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524308066692&di=a976aacdaaf2e23629bbf1cacbedccae&imgtype=0&src=http%3A%2F%2Fwww.jituwang.com%2Fuploads%2Fallimg%2F150924%2F258216-1509241AT548.jpg"></image>
         <div class="right">
-            <text class="item">{{categoryName}}</text>
+            <text class="category">{{categoryName}}</text>
             <div class="item" >
-                <div class="item num">
-                    <text>数量：</text>
-                    <text>{{num}}</text>
+                <div class="item num" style="width:250px">
+                    <text class="font">数量：</text>
+                    <text class="font" >{{num}}</text>
                 </div>
                 <div class="item num">
-                    <text>单价：</text>
-                    <text>{{price}}元</text>
+                    <text class="font">单价：</text>
+                    <text class="font">{{price}}元</text>
                 </div>
             </div>
             
             <div class="item">
-                <text>总价：</text>
-                <text>{{toatal}}元</text>
+                <text class="font">总价：</text>
+                <text class="font">{{toatal}}元</text>
             </div>
             
         </div>
@@ -44,7 +44,6 @@ export default {
         margin:5px;
         padding:5px;
         height: 180px;
-        border-width: 1px;
     }
     .img{
         background-color: goldenrod;
@@ -63,9 +62,21 @@ export default {
         flex-direction: row;
         text-align: center;
         align-items: center;
+        padding:5px;
+        font-size:28px;
     }
     .num{
-        margin:5px;
-        border-width: 1px;
+        margin-right:80px;
+    }
+
+    .font{
+        font-size:28px;
+    }
+    .category{
+        flex-direction: row;
+        text-align: center;
+        align-items: center;
+        padding:10px;
+        font-size:28px;
     }
 </style>

@@ -48,6 +48,7 @@ export default {
     .text{
         text-align: center;
         padding:10px;
+        font-size:30px;
     }
     .total{
         flex:2;

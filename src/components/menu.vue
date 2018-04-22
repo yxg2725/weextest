@@ -1,16 +1,10 @@
 <template>
-  <div >
-      <div class="bg">
-
-      </div>
-      <div class="page"> 
-            <text class="text" @click="onAdd">添加分类</text>
-            <div class="line"></div>
-            <text class="text" @click="onDel">删除分类</text>
-            <div class="line"></div>
-            <text class="text" @click="onAbout">关于</text>
-      </div>
-      
+  <div class="page">
+      <text class="text" @click="onAdd">添加分类</text>
+      <div class="line"></div>
+      <text class="text" @click="onDel">删除分类</text>
+      <div class="line"></div>
+      <text class="text" @click="onAbout">关于</text>
   </div>
 </template>
 
@@ -40,14 +34,6 @@ export default {
 </script>
 
 <style scoped>
-    .wrapper{
-        position: absolute;
-        opacity: 0.5;
-        left: 0px;
-        top:0px;
-        right: 0px;
-        bottom:0px;
-    }
     .page{
         background-color: white;
         position: absolute;
@@ -60,19 +46,11 @@ export default {
     .text{
         margin-left: 10px;
         margin-top:10px;
-        font-size: 28px;
+        font-size:28px;
+        padding:10px;
     }
     .line{
         height: 1px;
         background-color: grey;
-    }
-    .bg{
-        background-color: grey;
-        position: absolute;
-        opacity: 0.5;
-        left: 0px;
-        top:0px;
-        right: 0px;
-        bottom:0px;
     }
 </style>
