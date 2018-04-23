@@ -7,3 +7,13 @@ platforms/android/*.iml
 platforms/android/local.properties
 *.iml
 platforms/android/app/build/
+platforms/android/build/
+platforms/android/appframework/build/outputs/aar/appframework-release.aar
+platforms/android/appframework/build/
+test/unit/.eslintrc
+platforms/android/gradle.properties
+platforms/android/.weex_plugin.json
+.postcssrc.js
+.eslintrc.js
+.eslintignore
+.babelrc
