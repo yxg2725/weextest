@@ -4,19 +4,25 @@
         <div class="right">
             <text class="category">{{categoryName}}</text>
             <div class="item" >
-                <div class="item num" style="width:250px">
+                <div class="item num" >
                     <text class="font">数量：</text>
                     <text class="font" >{{num}}</text>
                 </div>
-                <div class="item num">
-                    <text class="font">单价：</text>
-                    <text class="font">{{price}}元</text>
-                </div>
+                
             </div>
             
             <div class="item">
-                <text class="font">总价：</text>
+
+                <div class="item num" style="width:250px">
+                    <text class="font">单价：</text>
+                    <text class="font">{{price}}元</text>
+                </div>
+
+                <div class="item num" >
+                    <text class="font">总价：</text>
                 <text class="font">{{toatal}}元</text>
+                </div>
+                
             </div>
             
         </div>

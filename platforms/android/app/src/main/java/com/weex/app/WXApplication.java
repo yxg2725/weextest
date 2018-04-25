@@ -2,6 +2,7 @@ package com.weex.app;
 
 import android.app.Application;
 
+import com.weex.app.extend.DialogModule;
 import com.weex.app.extend.ImageAdapter;
 import com.weex.app.extend.WXEventModule;
 import com.alibaba.weex.plugin.loader.WeexPluginContainer;
@@ -22,6 +23,7 @@ public class WXApplication extends Application {
     );
     try {
       WXSDKEngine.registerModule("event", WXEventModule.class);
+      WXSDKEngine.registerModule("dialog", DialogModule.class);
     } catch (WXException e) {
       e.printStackTrace();
     }

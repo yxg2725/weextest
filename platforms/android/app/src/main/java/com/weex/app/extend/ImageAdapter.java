@@ -58,6 +58,12 @@ public class ImageAdapter implements IWXImgLoaderAdapter {
           return;
         }
 
+        if(url.startsWith("assets")){
+          int index = url.indexOf(":");
+          String tempUrl = url.substring(index + 1,url.length());
+          temp = "file:///android_asset/img/"+tempUrl;
+        }
+
 
         if(!TextUtils.isEmpty(strategy.placeHolder)){
           Picasso.Builder builder=new Picasso.Builder(WXEnvironment.getApplication());

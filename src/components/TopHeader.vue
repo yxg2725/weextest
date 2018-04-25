@@ -1,7 +1,7 @@
 <template>
   <div class="page">
-      <text class="top"> {{title}}</text>
-      <image class="img" @click="onClick" src="assets:icon_phone.png"></image>
+      <text class="top" @longPress="onLongPress"> {{title}}</text>
+      <image class="img" @click="onClick" src="assets:icon_menu.png"></image>
   </div>
 </template>
 
@@ -15,7 +15,19 @@
     methods:{
       onClick(){
         this.$emit("menu","");
-      }
+      },
+      //item长按删除
+    onLongPress(){
+      //弹出对话框
+      // var dialogModule = require('@weex-module/dialog');
+      // dialogModule.delDialogShow(function (e) {
+      // if (e.result == 'ok') {
+      //   console.log("点击了确定：index ：" + index);
+      // } 
+      // });
+
+      console.log("+++++++++++++++index ：");
+    }
     }
 }
 </script>
@@ -34,7 +46,6 @@
     .img{
       width: 60px;
       height: 60px;
-      background-color: red;
       position: absolute;
       right: 20px;
       top:20px;
